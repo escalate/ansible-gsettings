@@ -18,3 +18,14 @@
   when: ansible_os_family == 'Debian'
   tags:
     - gsettings
+
+- name: Copy gsettings-dump to /usr/local/bin
+  copy:
+    src: gsettings-dump
+    dest: /usr/local/bin/gsettings-dump
+    owner: root
+    group: root
+    mode: 0755
+  when: ansible_os_family == 'Debian'
+  tags:
+    - gsettings
