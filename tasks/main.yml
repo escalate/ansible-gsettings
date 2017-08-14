@@ -8,13 +8,11 @@
   tags:
     - gsettings
 
-- name: Set gsettings per user
-  command: "gsettings set {{item.1.schema}} {{item.1.key}} {{item.1.value}}"
+- name: Set gsettings settings for user
+  command: "gsettings set {{item.schema}} {{item.key}} {{item.value}}"
   become: yes
-  become_user: "{{item.0.user}}"
-  with_subelements:
-    - "{{gsettings_per_user}}"
-    - gsettings
+  become_user: "{{gsettings_user}}"
+  with_items: "{{gsettings_settings}}"
   when: ansible_os_family == 'Debian'
   tags:
     - gsettings
